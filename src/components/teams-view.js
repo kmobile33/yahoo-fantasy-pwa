@@ -8,56 +8,20 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-import { html, css } from 'lit-element';
+import { html } from 'lit-element';
 import { PageViewElement } from './page-view-element.js';
-import { connect } from 'pwa-helpers/connect-mixin.js';
-
-// This element is connected to the Redux store.
-import { store } from '../store.js';
-
-// These are the actions needed by this element.
-import { getTeamInfo } from '../actions/team.js';
-
-// We are lazy loading its reducer.
-import team from '../reducers/team.js';
-store.addReducers({
-  team
-});
 
 // These are the elements needed by this element.
+import './teams-options.js';
+import './teams-table.js';
 
-// These are the shared styles needed by this element.
-import { SharedStyles } from './shared-styles.js';
-import { ButtonSharedStyles } from './button-shared-styles.js';
-
-class TeamsView extends connect(store)(PageViewElement) {
-  static get properties() {
-    return {
-      // This is the data from the store.
-      _teams: { type: Number },
-      _error: { type: String }
-    };
-  }
-
-  static get styles() {
-    return [
-      SharedStyles,
-      ButtonSharedStyles
-    ];
-  }
+class TeamsView extends PageViewElement {
 
   render() {
     return html`
-      <section>
-        <h2>Teams</h2>
-      </section>
+      <teams-options></teams-options>
+      <teams-table></teams-table>
     `;
-  }
-
-  // This is called every time something is updated in the store.
-  stateChanged(state) {
-    this._teams = state.team.teams
-    this._error = state.team.error;
   }
 }
 
