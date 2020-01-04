@@ -4,11 +4,6 @@ import '@polymer/paper-button/paper-button.js';
 
 import { store } from '../store.js';
 
-// We are lazy loading its reducer.
-import teamsReducer from '../reducers/team.js';
-store.addReducers({
-  teamsReducer
-});
 import { oneTeamSelected } from '../reducers/team.js';
 
 import { ButtonSharedStyles } from './button-shared-styles.js';
